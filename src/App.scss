@@ -1,15 +1,3 @@
 @import './sass/media.scss';
 @import './sass/index.scss';
 
-.app
-{
-  width:100%;
-  height:100vh;
-  overflow: hidden;
-  background-color: red;
-  color:white;
-  @include responsed-to(xs)
-  {
-    background-color: green;
-  }
-}
