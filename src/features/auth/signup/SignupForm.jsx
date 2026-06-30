@@ -1,22 +1,20 @@
-import "./Login.scss";
+import "../login/Login.scss";
 import loginImage from "../../../assets/videos/login-right-image.png";
-
-import ButtonBox from "../../../components/buttons/Buttons";
-import { InputBox } from "../../../components/inputs/UiInputs";
-
-import { loginTexts } from "../../../constants/constant";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import loginSchema from "../../../validation/loginSchema";
+import signupSchema from "../../../validation/signupSchema";
+import { loginTexts } from "../../../constants/constant";
+import { InputBox } from "../../../components/inputs/UiInputs";
+import ButtonBox from "../../../components/buttons/Buttons";
 
-function LoginForm() {
+function SignupForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(signupSchema),
   });
 
   const onSubmit = (data) => {
@@ -30,10 +28,29 @@ function LoginForm() {
           <div className="login-left-middle">
 
             <h2 className="fw-bold center fs-2">
-              {loginTexts.login}
+           Signup
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
+
+                   <div className="mt-3">
+
+                <label className="label">
+                  Name
+                  <span className="star">*</span>
+                </label>
+
+                <InputBox
+                  type="text"
+                  placeholder="Enter Your Name"
+                  {...register("name")}
+                />
+
+                <p className="error fs-14">
+                  {errors.name?.message}
+                </p>
+
+              </div>
 
               {/* Email */}
 
@@ -82,7 +99,7 @@ function LoginForm() {
                 <ButtonBox
                   type="submit"
                 >
-                  Login
+                  Signup
                 </ButtonBox>
 
               </div>
@@ -94,10 +111,10 @@ function LoginForm() {
             </div>
 
             <div className="center mt-2">
-              {loginTexts.Donthaveanaccount}
+              Already have an account? 
 
               <span className="blue-text cursor fw-medium">
-                {loginTexts.SignUp}
+                {loginTexts.login}
               </span>
 
             </div>
@@ -120,4 +137,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default SignupForm;

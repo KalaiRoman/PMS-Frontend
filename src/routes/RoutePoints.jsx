@@ -15,16 +15,17 @@ function RoutePoints() {
             />
           );
         }
-        else
-        {
-            <Route element={<ProtectedRouter/>}>
-              <Route
-              key={index}
-              path={item.path}
-              element={<Component />}
-            />
+       else {
+        return (
+            <Route element={<ProtectedRouter />}>
+                <Route
+                    key={index}
+                    path={item.path}
+                    element={<Component />}
+                />
             </Route>
-        }
+  );
+}
       })}
     </Routes>
   );

@@ -1,14 +1,20 @@
 import RouterApp from "../app/RouterApp";
 import StoreProvider from "../app/storeProvider";
+import SuspenceProvider from "../app/SuspenceProvider";
 import MainContextProvider from "../context/ContextProvider/MainContextProvider";
+import ErrorBoundary from "../utils/errorboundary/ErrorBoundary";
 function MiddleRouter({ children }) {
   return (
     <StoreProvider>
-      <MainContextProvider>
-        <RouterApp>
-          {children}
-        </RouterApp>
-      </MainContextProvider>
+      <ErrorBoundary>
+        <SuspenceProvider>
+          <MainContextProvider>
+            <RouterApp>
+              {children}
+            </RouterApp>
+          </MainContextProvider>
+        </SuspenceProvider>
+      </ErrorBoundary>
     </StoreProvider>
   );
 }

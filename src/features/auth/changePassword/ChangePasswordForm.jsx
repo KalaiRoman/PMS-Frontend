@@ -1,4 +1,4 @@
-import "./Login.scss";
+import "../login//Login.scss";
 import loginImage from "../../../assets/videos/login-right-image.png";
 
 import ButtonBox from "../../../components/buttons/Buttons";
@@ -8,15 +8,15 @@ import { loginTexts } from "../../../constants/constant";
 
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import loginSchema from "../../../validation/loginSchema";
+import changePasswordSchema from "../../../validation/changePasswordSchema";
 
-function LoginForm() {
+function ChangePasswordForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(changePasswordSchema),
   });
 
   const onSubmit = (data) => {
@@ -30,7 +30,7 @@ function LoginForm() {
           <div className="login-left-middle">
 
             <h2 className="fw-bold center fs-2">
-              {loginTexts.login}
+          Change Password
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -40,18 +40,18 @@ function LoginForm() {
               <div className="mt-3">
 
                 <label className="label">
-                  {loginTexts.EmailID}
+                  Password
                   <span className="star">*</span>
                 </label>
 
                 <InputBox
                   type="text"
-                  placeholder="Enter Your Email ID"
+                  placeholder="Enter Your New Password"
                   {...register("email")}
                 />
 
                 <p className="error fs-14">
-                  {errors.email?.message}
+                  {errors.password?.message}
                 </p>
 
               </div>
@@ -61,18 +61,18 @@ function LoginForm() {
               <div className="mt-3">
 
                 <label className="label">
-                  {loginTexts.Password}
+                  Confirm Password
                   <span className="star">*</span>
                 </label>
 
                 <InputBox
                   type="password"
-                  placeholder="Enter Your Password"
+                  placeholder="Enter Your Comfirm Password"
                   {...register("password")}
                 />
 
                 <p className="error fs-14">
-                  {errors.password?.message}
+                  {errors.confirmPassword?.message}
                 </p>
 
               </div>
@@ -82,7 +82,7 @@ function LoginForm() {
                 <ButtonBox
                   type="submit"
                 >
-                  Login
+                  Change Password
                 </ButtonBox>
 
               </div>
@@ -94,10 +94,9 @@ function LoginForm() {
             </div>
 
             <div className="center mt-2">
-              {loginTexts.Donthaveanaccount}
 
               <span className="blue-text cursor fw-medium">
-                {loginTexts.SignUp}
+         Login
               </span>
 
             </div>
@@ -120,4 +119,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default ChangePasswordForm;

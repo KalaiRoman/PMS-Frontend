@@ -1,22 +1,18 @@
-import "./Login.scss";
+import "../login/Login.scss";
 import loginImage from "../../../assets/videos/login-right-image.png";
-
-import ButtonBox from "../../../components/buttons/Buttons";
-import { InputBox } from "../../../components/inputs/UiInputs";
-
-import { loginTexts } from "../../../constants/constant";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import loginSchema from "../../../validation/loginSchema";
-
-function LoginForm() {
+import { loginTexts } from "../../../constants/constant";
+import { InputBox } from "../../../components/inputs/UiInputs";
+import ButtonBox from "../../../components/buttons/Buttons";
+import forgetpasswordSchema from "../../../validation/forgetpasswordSchema";
+function ForgetPasswordForm() {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(loginSchema),
+    resolver: zodResolver(forgetpasswordSchema),
   });
 
   const onSubmit = (data) => {
@@ -30,7 +26,7 @@ function LoginForm() {
           <div className="login-left-middle">
 
             <h2 className="fw-bold center fs-2">
-              {loginTexts.login}
+           Forget Password
             </h2>
 
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,31 +54,14 @@ function LoginForm() {
 
               {/* Password */}
 
-              <div className="mt-3">
-
-                <label className="label">
-                  {loginTexts.Password}
-                  <span className="star">*</span>
-                </label>
-
-                <InputBox
-                  type="password"
-                  placeholder="Enter Your Password"
-                  {...register("password")}
-                />
-
-                <p className="error fs-14">
-                  {errors.password?.message}
-                </p>
-
-              </div>
+            
 
               <div className="mt-4">
 
                 <ButtonBox
                   type="submit"
                 >
-                  Login
+                  Forget Password
                 </ButtonBox>
 
               </div>
@@ -94,10 +73,8 @@ function LoginForm() {
             </div>
 
             <div className="center mt-2">
-              {loginTexts.Donthaveanaccount}
-
               <span className="blue-text cursor fw-medium">
-                {loginTexts.SignUp}
+                {loginTexts.login}
               </span>
 
             </div>
@@ -120,4 +97,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default ForgetPasswordForm;

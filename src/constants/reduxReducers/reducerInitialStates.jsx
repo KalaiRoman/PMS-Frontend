@@ -4,4 +4,10 @@ const loginInitialState = {
   error: ""
 };
 
-export { loginInitialState };
+const projectInitialState = {
+  loading: false,
+  projectArray: [],
+  error: ""
+};
+
+export { loginInitialState, projectInitialState };

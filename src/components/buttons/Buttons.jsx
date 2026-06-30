@@ -1,6 +1,10 @@
-const ButtonBox = ({children}) => {
+const ButtonBox = ({ children, type = "button", className = "", ...props }) => {
   return (
-    <button className="btn-com">
+    <button
+      type={type}
+      className={`${className ? className : "btn-com"}`}
+      {...props}
+    >
       {children}
     </button>
   );

@@ -1,14 +1,27 @@
-const InputBox = ({ type, placeholder, onChange, value }) => {
-  return (
-    <input
-      type={type}
-      placeholder={placeholder}
-      value={value}
-      onChange={onChange}
-      className="input-box"
-    />
-  );
-};
+import { forwardRef } from "react";
+
+const InputBox = forwardRef(
+  (
+    {
+      type = "text",
+      placeholder,
+      className = "",
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <input
+        ref={ref}
+        type={type}
+        placeholder={placeholder}
+        className={`input-box ${className}`}
+        {...props}
+      />
+    );
+  }
+);
+
 
 const RadioBox = ({ type,label,onChange, value }) => {
   return (
