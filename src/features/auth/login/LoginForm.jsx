@@ -1,16 +1,15 @@
 import "./Login.scss";
 import loginImage from "../../../assets/videos/login-right-image.png";
-
 import ButtonBox from "../../../components/buttons/Buttons";
 import { InputBox } from "../../../components/inputs/UiInputs";
-
 import { loginTexts } from "../../../constants/constant";
-
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import loginSchema from "../../../validation/loginSchema";
-
-function LoginForm() {
+import { loginUser } from "../../../redux/actions/LoginAction";
+import HOC from "../../../utils/hoc/HOC";
+function LoginForm(props) {
+  const {dispatch}=props;
   const {
     register,
     handleSubmit,
@@ -18,11 +17,9 @@ function LoginForm() {
   } = useForm({
     resolver: zodResolver(loginSchema),
   });
-
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(loginUser(data,props.navigate));
   };
-
   return (
     <div className="login-section">
       <div className="login-inside">
@@ -32,32 +29,21 @@ function LoginForm() {
             <h2 className="fw-bold center fs-2">
               {loginTexts.login}
             </h2>
-
             <form onSubmit={handleSubmit(onSubmit)}>
-
-              {/* Email */}
-
               <div className="mt-3">
-
                 <label className="label">
                   {loginTexts.EmailID}
                   <span className="star">*</span>
                 </label>
-
                 <InputBox
                   type="text"
                   placeholder="Enter Your Email ID"
                   {...register("email")}
                 />
-
                 <p className="error fs-14">
                   {errors.email?.message}
                 </p>
-
               </div>
-
-              {/* Password */}
-
               <div className="mt-3">
 
                 <label className="label">
@@ -120,4 +106,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default HOC(LoginForm);
