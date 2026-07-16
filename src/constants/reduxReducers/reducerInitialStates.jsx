@@ -10,4 +10,10 @@ const projectInitialState = {
   error: ""
 };
 
-export { loginInitialState, projectInitialState };
+const userInitialState = {
+  loading: false,
+  users: [],
+  error: ""
+};
+
+export { loginInitialState, projectInitialState, userInitialState };

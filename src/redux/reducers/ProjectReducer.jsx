@@ -8,11 +8,14 @@ const projectReducer = createSlice({
     projectRequest(state) {
       state.loading = true;
     },
-    projectSuccess(state, action) {
+    projectAdd(state, action) {
       return {
         ...state,
         projectArray: [...state.projectArray, action.payload]
       };
+    },
+    getProjects(state, action) {
+      state.projectArray = action.payload;
     },
     projectError(state, action) {
       state.loading = false;
@@ -22,8 +25,9 @@ const projectReducer = createSlice({
 });
 export const {
   projectRequest,
-  projectSuccess,
-  projectError
+  projectAdd,
+  projectError,
+  getProjects
 } = projectReducer.actions;
 
 export default projectReducer.reducer;

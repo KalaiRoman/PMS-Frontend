@@ -1,13 +1,20 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ProjectModal from "./ProjectModal";
 import ProjectCards from "./ProjectCards";
 import "./Project.scss";
 import ButtonBox from "../../components/buttons/Buttons";
 import HOC from "../../utils/hoc/HOC";
+import { getProjectAction } from "../../redux/actions/ProjectActions";
 function Projects(props) {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  console.log(props.state)
+
+  useEffect(()=>{
+props.dispatch(getProjectAction())
+  },[])
   return (
     <div className="project-section">
       <div className="project-header-section">

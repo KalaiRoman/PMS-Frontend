@@ -1,5 +1,7 @@
 const apiEndPoint = {
-  login: "/auth/login"
+  login: "/auth/login",
+  users: "/auth/get",
+  projects:"/project/get"
 };
 
 export default apiEndPoint;

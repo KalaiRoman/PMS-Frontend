@@ -1,3 +1,5 @@
+import moment from "moment";
+
 const upperCase = params => {
   return params.toUpperCase();
 };
@@ -6,7 +8,11 @@ const lowerCase = params => {
   return params.toLowerCase();
 };
 const firstLetterUpperCase = params => {
-  return params.at(0).toUpperCase() + params.slice(1);
+  if(params)
+  {
+    
+    return params.at(0).toUpperCase() + params.slice(1);
+  }
 };
 
 const filterMethod = (data, key, name) => {
@@ -133,6 +139,10 @@ const arrayFromMethod = no => {
   return Array.from({ length: Number(no) }, () => "");
 };
 
+const timeFormate=(data)=>{
+  return moment(data).format('LT')
+}
+
 export {
   upperCase,
   firstLetterUpperCase,
@@ -165,5 +175,6 @@ export {
   splitMethod,
   repeatMethod,
   lengthMethod,
-  arrayFromMethod
+  arrayFromMethod,
+  timeFormate
 };
