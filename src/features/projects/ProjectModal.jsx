@@ -10,6 +10,7 @@ function ProjectModal({ show, handleClose }) {
         backdrop="static"
         keyboard={false}
         size="lg"
+        centered
       >
         <Modal.Header closeButton>
           <Modal.Title>Create New Project</Modal.Title>

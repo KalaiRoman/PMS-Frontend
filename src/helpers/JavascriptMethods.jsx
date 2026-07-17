@@ -1,180 +1,151 @@
 import moment from "moment";
 
-const upperCase = params => {
-  return params.toUpperCase();
+
+export const upperCase = str => str?.toString().toUpperCase() || "";
+
+export const lowerCase = str => str?.toString().toLowerCase() || "";
+
+export const firstLetterUpperCase = str =>
+  str ? str.charAt(0).toUpperCase() + str.slice(1) : "";
+
+export const startsWithMethod = (str = "", value = "") =>
+  str.startsWith(value);
+
+export const endsWithMethod = (str = "", value = "") =>
+  str.endsWith(value);
+
+export const replaceMethod = (str = "", oldValue, newValue) =>
+  str.replace(oldValue, newValue);
+
+export const replaceAllMethod = (str = "", oldValue, newValue) =>
+  str.replaceAll(oldValue, newValue);
+
+export const trimMethod = (str = "") => str.trim();
+
+export const splitMethod = (str = "", separator = "") =>
+  str.split(separator);
+
+export const repeatMethod = (str = "", count = 1) =>
+  str.repeat(Number(count));
+
+export const includesMethod = (value, search) =>
+  value?.includes(search);
+
+export const lengthMethod = value =>
+  value?.length ?? 0;
+
+export const filterMethod = (
+  data = [],
+  key,
+  value,
+  type
+) => {
+  if (!Array.isArray(data)) return [];
+
+
+
+  return data.filter(item =>
+  type=="not"?item?.[key]!==value:item?.[key]===value
+  );
 };
 
-const lowerCase = params => {
-  return params.toLowerCase();
+export const findMethod = (data = [], key, value) =>
+  data.find(item => item[key] === value);
+
+export const findIndexMethod = (data = [], key, value) =>
+  data.findIndex(item => item[key] === value);
+
+export const findLastIndexMethod = (data = [], key, value) =>
+  data.findLastIndex(item => item[key] === value);
+
+export const someMethod = (data = [], key, value) =>
+  data.some(item => item[key] === value);
+
+export const everyMethod = (data = [], key, value) =>
+  data.every(item => item[key] === value);
+
+export const sliceMethod = (data = [], end = 0) =>
+  data.slice(0, Number(end));
+
+export const atMethod = (data = [], index = 0) =>
+  data.at(Number(index));
+
+export const withMethod = (data = [], index, value) =>
+  data.with(index, value);
+
+export const toSortedMethod = (data = []) =>
+  data.toSorted();
+
+export const flatMethod = (data = []) =>
+  data.flat(Infinity);
+
+export const setMethod = (data = []) =>
+  [...new Set(data)];
+
+export const groupByMethod = (data = [], key) =>
+  Object.groupBy(data, item => item[key]);
+
+export const reduceMethod = (data = [], key) => {
+  if (!Array.isArray(data)) return 0;
+
+  return key
+    ? data.reduce((sum, item) => sum + (Number(item[key]) || 0), 0)
+    : data.reduce((sum, item) => sum + (Number(item) || 0), 0);
 };
-const firstLetterUpperCase = params => {
-  if(params)
-  {
-    
-    return params.at(0).toUpperCase() + params.slice(1);
+
+export const arrayFromMethod = count =>
+  Array.from({ length: Number(count) }, () => "");
+
+/* ===========================
+   OBJECT METHODS
+=========================== */
+
+export const objectMethods = (
+  obj = {},
+  type = "values"
+) => {
+  switch (type) {
+    case "keys":
+      return Object.keys(obj);
+
+    case "values":
+      return Object.values(obj);
+
+    case "entries":
+      return Object.entries(obj);
+
+    default:
+      return [];
   }
 };
 
-const filterMethod = (data, key, name) => {
-  return data.filter(item => item[key] == name);
-};
+/* ===========================
+   MATH METHODS
+=========================== */
 
-const sliceMethod = (data, no) => {
-  return data.slice(0, Number(no));
-};
+export const maxMethod = data =>
+  Math.max(...data);
 
-const includesMethod = (data, name) => {
-  return data.includes(name);
-};
+export const minMethod = data =>
+  Math.min(...data);
 
-const someMethod = (data, key, name) => {
-  return data.some(item => item[key] == name);
-};
+export const randomNoMethod = max =>
+  Math.floor(Math.random() * Number(max));
 
-const everyMethod = (data, key, name) => {
-  return data.every(item => item[key] == name);
-};
+/* ===========================
+   TYPE
+=========================== */
 
-const withMethod = (data, index, updateValue) => {
-  return data.with(index, updateValue);
-};
+export const typeOfMethod = value =>
+  typeof value;
 
-const tosortedMethod = data => {
-  return data.toSorted();
-};
 
-const groupbyMethod = (data, key) => {
-  return Object.groupBy(data, data => data[key]);
-};
 
-const startsWithMethod = (data, name) => {
-  return data.startsWith(`${name}`);
-};
-const endssWithMethod = (data, name) => {
-  return data.endsWith(`${name}`);
-};
+export const timeFormate = date =>
+  moment(date).format("LT");
 
-const replaceMethod = (data, replceName, changedName) => {
-  return data.replace(replceName, changedName);
-};
+export const dateFormat = date =>
+  moment(date).format("DD-MM-YYYY");
 
-const replaceAllMethod = (data, replceName, changedName) => {
-  return data.replaceAll(replceName, changedName);
-};
-
-const atMethod = (data, no) => {
-  return data.at(Number(no));
-};
-
-const typeofMethod = data => {
-  return typeof data;
-};
-
-const reduceMethod = (data, key) => {
-  if (key) {
-    return data.reduce((acc, current) => acc + current[key], 0);
-  } else {
-    return data.reduce((acc, current) => acc + current, 0);
-  }
-};
-
-const maxMethod = data => {
-  return Math.max(...data);
-};
-const minMethod = data => {
-  return Math.min(...data);
-};
-
-const randomnoMethod = (data, no) => {
-  return Math.round(Math.random() * Number(no));
-};
-
-const flatMethod = data => {
-  return data.flat(Infinity);
-};
-
-const setMethod = data => {
-  return [...new Set(data)];
-};
-
-const objectMethods = (data, key) => {
-  if (key == "values") {
-    return Object.values(data);
-  } else if (key == "keys") {
-    return Object.keys(data);
-  } else {
-    Object.entries(data);
-  }
-};
-
-const findMethod = (data, key, name) => {
-  return data.find(item => item[key] == name);
-};
-
-const findLastIndexMethod = data => {
-  return data.findLastIndexMethod(item => item);
-};
-
-const findIndexMethod = (data, key, name) => {
-  return data.findindex(item => item[key] == name);
-};
-
-const trimMethod = data => {
-  return data.trim();
-};
-
-const splitMethod = (data, key) => {
-  return data.split(`${key}`);
-};
-
-const repeatMethod = (data, no) => {
-  return data.repeat(Number(no));
-};
-
-const lengthMethod = data => {
-  return data.length();
-};
-
-const arrayFromMethod = no => {
-  return Array.from({ length: Number(no) }, () => "");
-};
-
-const timeFormate=(data)=>{
-  return moment(data).format('LT')
-}
-
-export {
-  upperCase,
-  firstLetterUpperCase,
-  filterMethod,
-  sliceMethod,
-  includesMethod,
-  someMethod,
-  everyMethod,
-  withMethod,
-  tosortedMethod,
-  groupbyMethod,
-  startsWithMethod,
-  replaceMethod,
-  replaceAllMethod,
-  atMethod,
-  lowerCase,
-  typeofMethod,
-  reduceMethod,
-  minMethod,
-  maxMethod,
-  randomnoMethod,
-  endssWithMethod,
-  flatMethod,
-  setMethod,
-  objectMethods,
-  findMethod,
-  findIndexMethod,
-  findLastIndexMethod,
-  trimMethod,
-  splitMethod,
-  repeatMethod,
-  lengthMethod,
-  arrayFromMethod,
-  timeFormate
-};
+export const dateTimeFormat = date =>
+  moment(date).format("DD-MM-YYYY hh:mm A");

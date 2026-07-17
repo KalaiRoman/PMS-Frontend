@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import "./Message.scss";
 import { getUsers } from "../../redux/actions/userAction";
 import HOC from './../../utils/hoc/HOC';
-import { firstLetterUpperCase, timeFormate } from "../../helpers/JavascriptMethods";
+import { filterMethod, findMethod, firstLetterUpperCase, timeFormate } from "../../helpers/JavascriptMethods";
 import { decodeToken } from "../../utils/tokens/TokenStorage";
 
 const conversations = [
@@ -135,11 +135,19 @@ function Messages(props) {
     }
   };
 
+  const userList=filterMethod(state?.user?.users,"_id",token._id,"not");
+
+
+  const findUser=findMethod(state?.user && state?.user?.users,"_id",token._id);
+
+  console.log(findUser,"findUser")
+
+
   return (
     <div className="chat-app">
       <aside className="chat-app__sidebar">
         <div className="chat-app__sidebar-header">
-          <span className="chat-app__logo">Loom</span>
+          <span className="chat-app__logo">{firstLetterUpperCase(findUser?.name)}</span>
           <button className="chat-app__icon-btn" aria-label="New message">
             +
           </button>
@@ -150,7 +158,7 @@ function Messages(props) {
         </div>
 
         <ul className="chat-app__conversation-list">
-          {state?.user && state?.user?.users?.map(c =>
+          {userList && userList?.map(c =>
             <li
               key={c.id}
               className={
